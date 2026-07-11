@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudioLash — Permanent Makeup by Kelsey Renée Beauty · Ventura, CA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #0a0a0a; --deep: #111111;
+      --glass: rgba(255,255,255,0.055);
+      --glass-border: rgba(255,255,255,0.10);
+      --mauve: #c9a0b4; --blush: #e8c4d4;
+      --gold: #c9a04a; --teal: #6db4b4;
+      --white: #f5f0f3; --muted: rgba(245,240,243,0.5);
+      --nav-h: 68px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--white); font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+    .orbs { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.14; animation: drift 20s ease-in-out infinite alternate; }
+    .o1 { width: 600px; height: 600px; background: #7b3f6e; top: -150px; left: -150px; }
+    .o2 { width: 450px; height: 450px; background: #c9a0b4; top: 35%; right: -100px; animation-delay: -7s; }
+    .o3 { width: 350px; height: 350px; background: #6db4b4; bottom: 10%; left: 15%; animation-delay: -14s; }
+    @keyframes drift { from { transform: translate(0,0) scale(1); } to { transform: translate(35px,45px) scale(1.1); } }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: rgba(10,10,10,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; letter-spacing: 3px; text-transform: uppercase; color: var(--white); text-decoration: none; }
+    .nav-logo span { color: var(--mauve); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-book { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; padding: 10px 22px; border-radius: 50px; background: var(--mauve); color: var(--black); text-decoration: none; font-weight: 500; transition: background 0.2s, transform 0.2s; }
+    .nav-book:hover { background: var(--blush); transform: translateY(-1px); }
+    @media (max-width: 768px) { .nav-links { display: none; } nav { padding: 0 20px; } }
+    section { position: relative; z-index: 1; }
+    .pad { padding: 100px 40px; max-width: 1100px; margin: 0 auto; }
+    @media (max-width: 600px) { .pad { padding: 70px 20px; } }
+    .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: calc(var(--nav-h) + 60px) 20px 80px; }
+    .hero-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; }
+    .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(52px, 10vw, 96px); font-weight: 300; line-height: 1.0; margin-bottom: 28px; }
+    .hero-title em { font-style: italic; color: var(--mauve); }
+    .hero-sub { font-size: 16px; color: var(--muted); line-height: 1.7; max-width: 520px; margin: 0 auto 44px; }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 15px 32px; border-radius: 50px; font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; border: none; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--mauve); color: var(--black); box-shadow: 0 8px 28px rgba(201,160,180,0.3); }
+    .btn-primary:hover { box-shadow: 0 12px 36px rgba(201,160,180,0.5); }
+    .btn-ghost { background: transparent; color: var(--white); border: 1px solid var(--glass-border); }
+    .btn-ghost:hover { border-color: var(--mauve); }
+    .hero-location { margin-top: 48px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 8px; justify-content: center; }
+    .eyebrow { font-size: 10px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(34px, 5vw, 52px); font-weight: 300; line-height: 1.15; margin-bottom: 16px; }
+    .section-title em { font-style: italic; color: var(--mauve); }
+    .section-sub { font-size: 15px; color: var(--muted); line-height: 1.7; max-width: 520px; margin-bottom: 52px; }
+    #services { background: var(--deep); }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .service-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 16px; padding: 32px 28px; backdrop-filter: blur(16px); transition: border-color 0.25s, transform 0.25s; }
+    .service-card:hover { border-color: var(--mauve); transform: translateY(-4px); }
+    .service-icon { font-size: 32px; margin-bottom: 16px; display: block; }
+    .service-name { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; margin-bottom: 6px; color: var(--white); }
+    .service-price { font-size: 13px; font-weight: 500; letter-spacing: 2px; color: var(--gold); margin-bottom: 12px; }
+    .service-desc { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 20px; }
+    .service-items { list-style: none; }
+    .service-items li { font-size: 12px; color: var(--muted); padding: 6px 0; border-bottom: 1px solid var(--glass-border); display: flex; align-items: center; gap: 8px; }
+    .service-items li::before { content: '—'; color: var(--mauve); font-size: 10px; }
+    .service-items li:last-child { border-bottom: none; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } }
+    .about-img-wrap { aspect-ratio: 3/4; border-radius: 16px; background: var(--glass); border: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: center; font-size: 80px; }
+    .about-stats { display: flex; gap: 32px; margin-top: 32px; }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; color: var(--mauve); line-height: 1; }
+    .stat-label { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+    #booking { background: var(--deep); text-align: center; }
+    .booking-wrap { max-width: 600px; margin: 0 auto; }
+    .booking-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 20px; padding: 48px 40px; backdrop-filter: blur(16px); margin-top: 20px; }
+    .booking-card p { font-size: 15px; color: var(--muted); line-height: 1.7; margin-bottom: 32px; }
+    .booking-btns { display: flex; flex-direction: column; gap: 12px; }
+    .vagaro-badge { margin-top: 20px; font-size: 11px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+    .vagaro-badge span { color: var(--teal); }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 12px; }
+    .contact-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 14px; padding: 24px 20px; text-align: center; text-decoration: none; transition: border-color 0.2s, transform 0.2s; color: var(--white); }
+    .contact-card:hover { border-color: var(--mauve); transform: translateY(-3px); }
+    .contact-icon { font-size: 28px; margin-bottom: 10px; display: block; }
+    .contact-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .contact-value { font-size: 14px; color: var(--white); font-weight: 500; }
+    .social-strip { display: flex; justify-content: center; gap: 20px; padding: 40px 20px; flex-wrap: wrap; }
+    .social-link { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 8px; transition: color 0.2s; }
+    .social-link:hover { color: var(--mauve); }
+    footer { border-top: 1px solid var(--glass-border); text-align: center; padding: 28px 20px; font-size: 11px; color: rgba(255,255,255,0.18); letter-spacing: 1px; }
+    footer span { color: var(--gold); }
+    .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--glass-border), transparent); }
+  </style>
+</head>
+<body>
+<div class="orbs">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+</div>
+<nav>
+  <a class="nav-logo" href="#">Studio<span>Lash</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#booking">Book</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="nav-book" href="#booking">Book Now</a>
+</nav>
+<section class="hero">
+  <p class="hero-eyebrow">Ventura's Beauty Studio</p>
+  <h1 class="hero-title">Brows.<br><em>Elevated.</em></h1>
+  <p class="hero-sub">Ombre brows, nano brows, combo brows, and lip blush — permanent makeup in a studio that feels as good as you'll look. Located near Downtown Ventura.</p>
+  <div class="hero-btns">
+    <a class="btn btn-primary" href="#booking">Book Your Appointment</a>
+    <a class="btn btn-ghost" href="#services">View Services</a>
+  </div>
+  <p class="hero-location">📍 Near Thompson & Downtown · Ventura, CA · By the Beach</p>
+</section>
+<div class="divider"></div>
+<section id="services">
+  <div class="pad">
+    <p class="eyebrow">What We Do</p>
+    <h2 class="section-title">Services built for<br><em>real results.</em></h2>
+    <p class="section-sub">Every service is done with care, precision, and a whole lot of love for the craft. No cookie-cutter looks here.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-icon">✨</span>
+        <h3 class="service-name">Ombre / Powder Brows</h3>
+        <p class="service-price">$450</p>
+        <p class="service-desc">A soft, shaded brow with that airbrushed, makeup-finished look. Fades lighter at the front, deeper through the tail — wake up with brows already done.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🪶</span>
+        <h3 class="service-name">Nano Brows</h3>
+        <p class="service-price">$500</p>
+        <p class="service-desc">Ultra-fine, hair-like strokes done with a machine for the most natural brow possible. Perfect if you want realistic texture, not a filled-in look.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">💫</span>
+        <h3 class="service-name">Combo Brows</h3>
+        <p class="service-price">$550</p>
+        <p class="service-desc">The best of both worlds — hair strokes through the front for realism, soft shading through the body and tail for definition and fullness.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">💋</span>
+        <h3 class="service-name">Lip Blush</h3>
+        <p class="service-price">$450</p>
+        <p class="service-desc">A soft wash of color that defines your lip shape, evens tone, and gives you that just-bitten flush — no liner, no lipstick, no effort.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+<section id="about">
+  <div class="pad">
+    <div class="about-grid">
+      <div class="about-img-wrap">🌸</div>
+      <div class="about-text">
+        <p class="eyebrow">About Kelsey</p>
+        <h2 class="section-title">Your artist.<br><em>Your people.</em></h2>
+        <p class="section-sub">Hey — I'm Kelsey. I started StudioLash because I believe everyone deserves to feel like the best version of themselves. This isn't just a studio, it's a vibe. Come in, get comfortable, and leave feeling incredible.</p>
+        <p class="section-sub">StudioLash is nestled near Downtown Ventura — close to the beach, close to Thompson — a little spot that's become a lot of people's favorite place to land.</p>
+        <div class="about-stats">
+          <div><div class="stat-num">4</div><div class="stat-label">Signature Services</div></div>
+          <div><div class="stat-num">💕</div><div class="stat-label">Happy Clients</div></div>
+          <div><div class="stat-num">1</div><div class="stat-label">Studio, All Heart</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+<section id="booking">
+  <div class="pad">
+    <div class="booking-wrap">
+      <p class="eyebrow">Ready to Glow</p>
+      <h2 class="section-title">Book your<br><em>appointment.</em></h2>
+      <div class="booking-card">
+        <p>Booking is quick and easy through Vagaro — pick your service, choose a time that works for you, and you're all set. No back-and-forth, no waiting.</p>
+        <div class="booking-btns">
+          <a class="btn btn-primary" href="https://www.vagaro.com/studiolash" target="_blank">📅 Book on Vagaro</a>
+          <a class="btn btn-ghost" href="tel:6614366728">📞 Call — 661-436-6728</a>
+          <a class="btn btn-ghost" href="sms:6614366728">💬 Text Us</a>
+        </div>
+        <p class="vagaro-badge">Powered by <span>Vagaro</span> · Secure Online Booking</p>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+<section id="contact">
+  <div class="pad">
+    <p class="eyebrow">Get In Touch</p>
+    <h2 class="section-title">Find us.<br><em>Follow us.</em></h2>
+    <div class="contact-grid">
+      <a class="contact-card" href="tel:6614366728"><span class="contact-icon">📞</span><div class="contact-label">Call or Text</div><div class="contact-value">661-436-6728</div></a>
+      <a class="contact-card" href="https://instagram.com/kelseyreneebeauty" target="_blank"><span class="contact-icon">📸</span><div class="contact-label">Instagram</div><div class="contact-value">@kelseyreneebeauty</div></a>
+      <a class="contact-card" href="https://tiktok.com/@kelseyreneebeauty" target="_blank"><span class="contact-icon">🎵</span><div class="contact-label">TikTok</div><div class="contact-value">@kelseyreneebeauty</div></a>
+      <div class="contact-card"><span class="contact-icon">📍</span><div class="contact-label">Location</div><div class="contact-value">Near Thompson & Downtown, Ventura CA</div></div>
+    </div>
+  </div>
+</section>
+<div class="social-strip">
+  <a class="social-link" href="https://instagram.com/kelseyreneebeauty" target="_blank">📸 Instagram</a>
+  <a class="social-link" href="https://tiktok.com/@kelseyreneebeauty" target="_blank">🎵 TikTok</a>
+  <a class="social-link" href="https://threads.net/@kelseyreneebeauty" target="_blank">🧵 Threads</a>
+</div>
+<footer>© 2026 StudioLash · Ventura, CA · Powered by <span>HCHY</span></footer>
+</body>
+</html>
