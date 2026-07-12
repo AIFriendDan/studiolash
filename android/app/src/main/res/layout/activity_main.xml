@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="32dp"
+    android:background="@color/background">
+
+    <ImageView
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:src="@drawable/ic_photo_duplicate"
+        android:layout_marginBottom="16dp"
+        android:tint="@color/colorPrimary" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Duplicate Cleaner"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="@color/textPrimary"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Find and remove duplicate photos automatically"
+        android:textSize="14sp"
+        android:textColor="@color/textSecondary"
+        android:gravity="center"
+        android:layout_marginBottom="40dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnScanNow"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Scan Now"
+        android:textSize="16sp"
+        app:cornerRadius="12dp"
+        android:layout_marginBottom="16dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSchedule"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Set Auto-Scan Schedule"
+        android:textSize="16sp"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        app:cornerRadius="12dp"
+        android:layout_marginBottom="16dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnPitCreek"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Pit Creek Deep Clean"
+        android:textSize="16sp"
+        style="@style/Widget.Material3.Button.TonalButton"
+        app:cornerRadius="12dp" />
+
+</LinearLayout>
