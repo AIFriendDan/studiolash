@@ -68,6 +68,7 @@
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
     @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } }
     .about-img-wrap { aspect-ratio: 3/4; border-radius: 16px; background: var(--glass); border: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: center; font-size: 80px; }
+    .about-img-wrap img { width: 100%; height: 100%; object-fit: cover; border-radius: 16px; }
     .about-stats { display: flex; gap: 32px; margin-top: 32px; }
     .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; color: var(--mauve); line-height: 1; }
     .stat-label { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
@@ -156,7 +157,7 @@
 <section id="about">
   <div class="pad">
     <div class="about-grid">
-      <div class="about-img-wrap">🌸</div>
+      <div class="about-img-wrap"><img src="kelsey.jpg" alt="Kelsey, permanent makeup artist at Kelsey Renée Beauty in Ventura, CA" /></div>
       <div class="about-text">
         <p class="eyebrow">About Kelsey</p>
         <h2 class="section-title">Your artist.<br><em>Your people.</em></h2>
