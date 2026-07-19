@@ -1,8 +1,0 @@
-{
-  "name": "studio-lash",
-  "version": "1.0.0",
-  "private": true,
-  "dependencies": {
-    "resend": "^6.12.0"
-  }
-}

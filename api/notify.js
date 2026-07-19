@@ -1,57 +1,71 @@
-const { Resend } = require('resend');
+// Vercel serverless function — sends a booking SMS notification to Kelsey via Twilio.
+// Uses the HCiHY Twilio subaccount (created 2026-07-05), same one wired for
+// Leilani's Classy Cleaning (see leilanis-classy-cleaning/api/notify-sms.js).
 
-module.exports = async function handler(req, res) {
+const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID;
+const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN;
+const TWILIO_FROM_NUMBER = process.env.TWILIO_FROM_NUMBER;
+
+// Kelsey's own phone — same number as the public site's tel:/sms: links.
+// Confirmed by Dan 2026-07-19.
+const KELSEY_PHONE = '+16614366728';
+
+function toE164(phone) {
+  const digits = String(phone || '').replace(/\D/g, '');
+  if (digits.length === 10) return `+1${digits}`;
+  if (digits.length === 11 && digits.startsWith('1')) return `+${digits}`;
+  return null;
+}
+
+async function sendSms(to, body) {
+  const auth = Buffer.from(`${TWILIO_ACCOUNT_SID}:${TWILIO_AUTH_TOKEN}`).toString('base64');
+  const params = new URLSearchParams({ To: to, From: TWILIO_FROM_NUMBER, Body: body });
+
+  const res = await fetch(
+    `https://api.twilio.com/2010-04-01/Accounts/${TWILIO_ACCOUNT_SID}/Messages.json`,
+    {
+      method: 'POST',
+      headers: {
+        Authorization: `Basic ${auth}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: params,
+    }
+  );
+
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`Twilio ${res.status}: ${text}`);
+  }
+}
+
+module.exports = async (req, res) => {
   if (req.method !== 'POST') {
-    res.status(405).json({ error: 'Method not allowed' });
+    res.status(405).json({ ok: false, error: 'Method not allowed' });
     return;
   }
 
-  const { name, phone, email, day, time, service, notes } = req.body || {};
+  const { name, phone, day, time, service, notes } = req.body || {};
 
   if (!name || !phone || !day || !time) {
-    res.status(400).json({ error: 'Missing required fields' });
+    res.status(400).json({ ok: false, error: 'Missing required fields' });
     return;
   }
 
-  if (!process.env.RESEND_API_KEY) {
-    console.warn('RESEND_API_KEY is not set. Booking request received but not emailed.');
-    res.status(500).json({ error: 'Notification email is not configured yet' });
+  if (!TWILIO_ACCOUNT_SID || !TWILIO_AUTH_TOKEN || !TWILIO_FROM_NUMBER) {
+    console.error('Twilio env vars not configured — cannot send booking SMS');
+    res.status(500).json({ ok: false, error: 'SMS notification is not configured yet' });
     return;
   }
 
-  const resend = new Resend(process.env.RESEND_API_KEY);
-  const fromEmail = process.env.RESEND_FROM_EMAIL || 'bookings@hcihysvc.com';
-  const notifyTo = process.env.NOTIFY_EMAIL || 'dan.garza@hcihysvc.com';
-
-  const bodyLines = [
-    `New booking request — Kelsey Renée Beauty`,
-    ``,
-    `Name: ${name}`,
-    `Phone: ${phone}`,
-    `Email: ${email || 'n/a'}`,
-    `Service: ${service || 'n/a'}`,
-    `Requested day: ${day}`,
-    `Requested time: ${time}`,
-    `Notes: ${notes || 'n/a'}`,
-  ];
+  const clientPhone = toE164(phone) || phone;
+  const body = `New booking request — ${name}, ${service || 'service TBD'}, ${day} @ ${time}. Phone: ${clientPhone}${notes ? `. Notes: ${notes}` : ''}`;
 
   try {
-    const { error } = await resend.emails.send({
-      from: `Kelsey Renée Beauty Booking <${fromEmail}>`,
-      to: [notifyTo],
-      subject: `New booking request — ${name} (${day} @ ${time})`,
-      html: bodyLines.map((line) => `<p>${line}</p>`).join(''),
-    });
-
-    if (error) {
-      console.error('Resend error:', error);
-      res.status(502).json({ error: 'Failed to send notification email' });
-      return;
-    }
-
+    await sendSms(KELSEY_PHONE, body);
     res.status(200).json({ ok: true });
   } catch (err) {
-    console.error('Notify handler error:', err);
-    res.status(500).json({ error: 'Unexpected server error' });
+    console.error('Kelsey SMS failed:', err.message);
+    res.status(502).json({ ok: false, error: 'Failed to send SMS notification' });
   }
 };
