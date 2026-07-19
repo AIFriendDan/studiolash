@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book an Appointment — Kelsey Renée Beauty</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #0a0a0a; --deep: #111111;
+      --glass: rgba(255,255,255,0.055);
+      --glass-border: rgba(255,255,255,0.10);
+      --mauve: #c9a0b4; --blush: #e8c4d4;
+      --gold: #c9a04a; --teal: #6db4b4;
+      --white: #f5f0f3; --muted: rgba(245,240,243,0.5);
+    }
+    body { background: var(--black); color: var(--white); font-family: 'DM Sans', sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 60px 20px; }
+    .wrap { max-width: 520px; width: 100%; }
+    .back { display: inline-block; font-size: 12px; letter-spacing: 1px; color: var(--muted); text-decoration: none; margin-bottom: 24px; }
+    .back:hover { color: var(--white); }
+    .eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 6vw, 48px); font-weight: 300; line-height: 1.15; margin-bottom: 12px; }
+    h1 em { font-style: italic; color: var(--mauve); }
+    .sub { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 36px; }
+    form { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 20px; padding: 36px 32px; backdrop-filter: blur(16px); }
+    label { display: block; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; margin-top: 20px; }
+    label:first-of-type { margin-top: 0; }
+    input, select, textarea { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border); border-radius: 10px; padding: 13px 14px; color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 14px; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--mauve); }
+    textarea { resize: vertical; min-height: 80px; }
+    select option { background: var(--deep); }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 480px) { .row { grid-template-columns: 1fr; } }
+    .btn { width: 100%; margin-top: 28px; padding: 16px; border-radius: 50px; font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; background: var(--mauve); color: var(--black); transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(201,160,180,0.4); }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .msg { margin-top: 18px; font-size: 13px; text-align: center; line-height: 1.6; display: none; }
+    .msg.show { display: block; }
+    .msg.success { color: var(--teal); }
+    .msg.error { color: #e8a0a0; }
+    .success-screen { display: none; text-align: center; padding: 20px 0; }
+    .success-screen.show { display: block; }
+    .success-screen .icon { font-size: 44px; margin-bottom: 16px; }
+    .success-screen h2 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 26px; margin-bottom: 12px; }
+    .success-screen p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="/">&larr; Back to site</a>
+    <p class="eyebrow">Kelsey Renée Beauty</p>
+    <h1>Request an <em>appointment.</em></h1>
+    <p class="sub">Pick a day, tell us a time that works, and we'll confirm with you directly. No account needed.</p>
+
+    <form id="bookingForm">
+      <label for="name">Your Name</label>
+      <input type="text" id="name" name="name" required />
+
+      <div class="row">
+        <div>
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" required />
+        </div>
+        <div>
+          <label for="email">Email (optional)</label>
+          <input type="email" id="email" name="email" />
+        </div>
+      </div>
+
+      <label for="service">Service</label>
+      <select id="service" name="service">
+        <option value="">Select a service</option>
+        <option>Ombre Brows</option>
+        <option>Nano Brows</option>
+        <option>Combo Brows</option>
+        <option>Lip Blush</option>
+        <option>Touch-Up</option>
+        <option>Other / Not Sure</option>
+      </select>
+
+      <div class="row">
+        <div>
+          <label for="day">Preferred Day</label>
+          <input type="date" id="day" name="day" required />
+        </div>
+        <div>
+          <label for="time">Preferred Time</label>
+          <input type="time" id="time" name="time" required />
+        </div>
+      </div>
+
+      <label for="notes">Notes (optional)</label>
+      <textarea id="notes" name="notes" placeholder="Anything else Kelsey should know?"></textarea>
+
+      <button type="submit" class="btn" id="submitBtn">Request Appointment</button>
+      <p class="msg" id="formMsg"></p>
+    </form>
+
+    <div class="success-screen" id="successScreen">
+      <div class="icon">✨</div>
+      <h2>You're all set!</h2>
+      <p>Your request has been sent. Kelsey will reach out to confirm your appointment shortly.</p>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('bookingForm');
+    const msg = document.getElementById('formMsg');
+    const btn = document.getElementById('submitBtn');
+    const successScreen = document.getElementById('successScreen');
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      msg.className = 'msg';
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      const data = new FormData(form);
+      const payload = Object.fromEntries(data.entries());
+
+      try {
+        const resp = await fetch('/api/notify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        if (!resp.ok) {
+          throw new Error('Request failed');
+        }
+
+        form.style.display = 'none';
+        successScreen.classList.add('show');
+      } catch (err) {
+        msg.textContent = "Something went wrong sending your request — please call or text us at 661-436-6728 instead.";
+        msg.className = 'msg show error';
+        btn.disabled = false;
+        btn.textContent = 'Request Appointment';
+      }
+    });
+  </script>
+</body>
+</html>
