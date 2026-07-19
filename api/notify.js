@@ -6,8 +6,9 @@ const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID;
 const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN;
 const TWILIO_FROM_NUMBER = process.env.TWILIO_FROM_NUMBER;
 
-// Kelsey's own phone — same number as the public site's tel:/sms: links.
-// Confirmed by Dan 2026-07-19.
+// Kelsey's own phone. This is the same number as the public site's tel:/sms:
+// links — Kelsey's personal number and the business number are one and the
+// same. Confirmed by Dan 2026-07-19.
 const KELSEY_PHONE = '+16614366728';
 
 function toE164(phone) {

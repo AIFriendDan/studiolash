@@ -12,7 +12,7 @@ The first build (2026-07-18) wired `/api/notify` to Resend, emailing Dan on ever
 
 ### Kelsey's phone number
 
-Not found anywhere in the workspace (checked `hcihy-clients-vercelapps/`, `studiolash/`, Notion fallback trackers, onboarding form templates — all empty of a stored value). **Dan provided it directly: 661-436-6728** — the same number already public on the site's `tel:`/`sms:` links. Hardcoded in `api/notify.js` as `KELSEY_PHONE = '+16614366728'`.
+Not found anywhere in the workspace as a distinct value (checked `hcihy-clients-vercelapps/`, `studiolash/`, Notion fallback trackers, onboarding form templates — all empty). **Confirmed by Dan: Kelsey's personal number and the business number are one and the same — 661-436-6728**, already public on the site's `tel:`/`sms:` links. Hardcoded in `api/notify.js` as `KELSEY_PHONE = '+16614366728'`.
 
 ## What was built
 
